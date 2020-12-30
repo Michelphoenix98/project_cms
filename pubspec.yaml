@@ -1,5 +1,5 @@
-name: project_cms
-description: A campus management system for PEC
+name: campus_tool
+description: A tool to manage and view attendance.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -14,23 +14,21 @@ description: A campus management system for PEC
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  cloud_firestore: ^0.11.0+1
-  google_sign_in: ^4.0.0
-  flutter_calendar_carousel: ^1.4.7
-  #google_sign_in: ^4.0.0
-  #firebase_core: ^0.4.0+8
-  firebase_auth:
-    path: C:\Users\miche\plugins\packages\firebase_auth
-  #uuid: ^2.0.2
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
-
+  form_field_validator: ^1.0.1
+  firebase_auth: ^0.16.0
+  cloud_firestore: ^0.11.0+1
+  neumorphic: ^0.4.0
+  equatable: ^1.2.3
+  flutter_bloc: ^0.11.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -47,8 +45,11 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/google_logo.png
     - assets/logo.png
+  fonts:
+    - family: JH
+      fonts:
+        - asset: fonts/jh.ttf
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg
@@ -79,7 +80,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-  fonts:
-    - family: JH
-      fonts:
-        - asset: fonts/jh.ttf
