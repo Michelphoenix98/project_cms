@@ -8,7 +8,7 @@ import 'package:campus_tool/bloc/login_bloc/login_bloc.dart';
 import 'package:campus_tool/bloc/login_bloc/login_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../forgot_password.dart';
+import 'forgot_password.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import '../resources/user_repository.dart';
@@ -168,23 +168,50 @@ class _CustomFormState extends State<CustomForm> {
     );
   }
 
+  void _onResendVerificationEmail(User user) {
+    _loginBloc.dispatch(ResendVerificationEmail(user: user));
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener(
       bloc: _loginBloc,
       listener: (BuildContext context, LoginState state) {
         if (state.isFailure) {
-          Scaffold.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text('Login Failure'), Icon(Icons.error)],
+          if (state.isEmailAuthenticated) {
+            Scaffold.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(
+                  action: SnackBarAction(
+                      textColor: Colors.white,
+                      label: "Resend",
+                      onPressed: () {
+                        _onResendVerificationEmail(state.user);
+                      }),
+                  content: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Account not verified."),
+                      Icon(Icons.email)
+                    ],
+                  ),
+                  backgroundColor: Colors.blue,
                 ),
-                backgroundColor: Colors.red,
-              ),
-            );
+              );
+          } else {
+            Scaffold.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(
+                  content: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [Text('Login Failure'), Icon(Icons.error)],
+                  ),
+                  backgroundColor: Colors.red,
+                ),
+              );
+          }
         }
         if (state.isSubmitting) {
           Scaffold.of(context)
@@ -198,6 +225,22 @@ class _CustomFormState extends State<CustomForm> {
                     CircularProgressIndicator(),
                   ],
                 ),
+              ),
+            );
+        }
+        if (state.verificationEmailJustSent) {
+          Scaffold.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Verification email sent.'),
+                    Icon(Icons.check)
+                  ],
+                ),
+                backgroundColor: Colors.red,
               ),
             );
         }

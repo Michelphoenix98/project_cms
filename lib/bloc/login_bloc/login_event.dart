@@ -1,3 +1,4 @@
+import 'package:campus_tool/resources/user_repository.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 
@@ -73,4 +74,20 @@ class LoginWithCredentialsPressed extends LoginEvent {
   @override
   // TODO: implement props
   List<Object> get props => [email, password];
+}
+class ResendVerificationEmail extends LoginEvent{
+  final User user;
+
+  ResendVerificationEmail({@required this.user}):super([user.user.email]);
+
+  @override
+  String toString() {
+    return 'ResendVerificationEmail { email: ${user.user.email} }';
+  }
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [user.user.email];
+
+
 }

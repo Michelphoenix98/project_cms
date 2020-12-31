@@ -33,7 +33,10 @@ class AuthenticationBloc
       final isSignedIn = await _userRep.isSignedIn();
       if (isSignedIn) {
         final name = await _userRep.getUser();
-        yield Authenticated(name.user.email);
+        if (name.user.isEmailVerified)
+          yield Authenticated(name.user.email);
+        else
+          yield Unauthenticated();
       } else {
         yield Unauthenticated();
       }

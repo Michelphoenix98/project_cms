@@ -46,6 +46,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         password: event.password,
       );
     }
+    else if (event is ResendVerificationEmail){
+      yield* _mapResendVerificationEmailToState( event.user
+      );
+    }
+  }
+
+  Stream<LoginState> _mapResendVerificationEmailToState(User user) async*{
+    _userRepository.sendVerficationLink(user.user);
+    LoginState.verificationEmailSent(user);
+
   }
 
   Stream<LoginState> _mapEmailChangedToState(String email) async* {
@@ -73,12 +83,23 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     String email,
     String password,
   }) async* {
+    User user;
     yield LoginState.loading();
-    try {
-      await _userRepository.signIn(email, password);
+
+    user = await _userRepository.signIn(email, password);
+    print(user.message);
+    if (user.message == "Signed in successfully")
       yield LoginState.success();
-    } catch (_) {
+    else if (user.message ==
+            "There is no user record corresponding to this identifier. The user may have been deleted." ||
+        user.message ==
+            "The password is invalid or the user does not have a password.") {
+      //print("REACHED!");
       yield LoginState.failure();
+    } else if (user.message ==
+        "Please check your mail for the verification link") {
+     // _userRepository.sendVerficationLink(user.user);
+      yield LoginState.notVerified(user);
     }
   }
 }
