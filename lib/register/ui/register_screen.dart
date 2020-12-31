@@ -1,5 +1,5 @@
-import 'package:campus_tool/bloc/authentication_bloc/bloc.dart';
-import 'package:campus_tool/bloc/register_bloc/bloc.dart';
+import 'package:campus_tool/authentication/bloc/bloc.dart';
+import 'package:campus_tool/register/bloc/bloc.dart';
 import 'package:campus_tool/resources/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:campus_tool/authentication/bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:campus_tool/bloc/authentication_bloc/bloc.dart';
+
 import 'package:campus_tool/resources/user_repository.dart';
 
 class AuthenticationBloc

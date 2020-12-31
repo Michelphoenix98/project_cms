@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:campus_tool/login/bloc/bloc.dart';
+import 'package:campus_tool/util/validators.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:campus_tool/bloc/login_bloc/bloc.dart';
+
 import 'package:campus_tool/resources/user_repository.dart';
-import 'package:campus_tool/resources/validators.dart';
+
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   UserRepository _userRepository;
@@ -45,17 +47,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         email: event.email,
         password: event.password,
       );
-    }
-    else if (event is ResendVerificationEmail){
-      yield* _mapResendVerificationEmailToState( event.user
-      );
+    } else if (event is ResendVerificationEmail) {
+      yield* _mapResendVerificationEmailToState(event.user);
     }
   }
 
-  Stream<LoginState> _mapResendVerificationEmailToState(User user) async*{
+  Stream<LoginState> _mapResendVerificationEmailToState(User user) async* {
     _userRepository.sendVerficationLink(user.user);
     LoginState.verificationEmailSent(user);
-
   }
 
   Stream<LoginState> _mapEmailChangedToState(String email) async* {
@@ -98,7 +97,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       yield LoginState.failure();
     } else if (user.message ==
         "Please check your mail for the verification link") {
-     // _userRepository.sendVerficationLink(user.user);
+      // _userRepository.sendVerficationLink(user.user);
       yield LoginState.notVerified(user);
     }
   }

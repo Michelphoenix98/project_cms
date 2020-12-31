@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'resources/user_repository.dart';
-import 'ui/common.dart';
+import '../resources/user_repository.dart';
+import 'package:campus_tool/util/common.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   @override

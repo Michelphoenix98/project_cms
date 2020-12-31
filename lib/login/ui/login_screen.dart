@@ -1,23 +1,18 @@
 import 'dart:ui';
-import 'dart:ui';
 
-import 'package:campus_tool/bloc/authentication_bloc/authentication_bloc.dart';
-import 'package:campus_tool/bloc/authentication_bloc/authentication_event.dart';
-import 'package:campus_tool/bloc/login_bloc/bloc.dart';
-import 'package:campus_tool/bloc/login_bloc/login_bloc.dart';
-import 'package:campus_tool/bloc/login_bloc/login_state.dart';
+import 'package:campus_tool/authentication/bloc/bloc.dart';
+import 'package:campus_tool/forgot_password/forgot_password.dart';
+import 'package:campus_tool/login/bloc/bloc.dart';
+import 'package:campus_tool/register/ui/register_screen.dart';
+import 'package:campus_tool/util/nm_box.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:campus_tool/util/common.dart';
 
-import 'forgot_password.dart';
 import 'package:flutter/material.dart';
-import 'package:form_field_validator/form_field_validator.dart';
-import '../resources/user_repository.dart';
-import 'package:neumorphic/neumorphic.dart';
-import 'nm_box.dart';
-//import 'home_screen.dart';
-//import 'registration_screen.dart';
-import 'common.dart';
-import 'register_screen.dart';
+
+import '../../resources/user_repository.dart';
+
+
 
 class LoginScreen extends StatefulWidget {
   final UserRepository _userRepository;

@@ -1,13 +1,14 @@
-import 'package:campus_tool/ui/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:campus_tool/bloc/authentication_bloc/bloc.dart';
-import 'bloc/simple_block_delegate.dart';
-import 'ui/login_screen.dart';
+
+import 'authentication/bloc/bloc.dart';
+import 'home/ui/home_screen.dart';
+import 'login/ui/login_screen.dart';
 import 'package:bloc/bloc.dart';
 import 'resources/user_repository.dart';
-import 'ui/splash_screen.dart';
+import 'splash/ui/splash_screen.dart';
+import 'util/simple_block_delegate.dart';
 
 void main() {
   BlocSupervisor().delegate = SimpleBlocDelegate();
